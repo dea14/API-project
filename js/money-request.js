@@ -2,6 +2,19 @@ const postBtn1 = document.getElementById("post-btn1");
 const postBtn2 = document.getElementById("post-btn2");
 const postBtn3 = document.getElementById("post-btn3");
 
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+const f = makeid(5);
+
 const sendMoneyRequest = (method, url, data) => {
   const promise = new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -11,8 +24,8 @@ const sendMoneyRequest = (method, url, data) => {
       "Bearer 3dd2360f-147d-4f0d-8ce5-b0c264f8ff4e"
     );
     xhr.setRequestHeader("thirdPartyAccessId", "CA1TAwc9K4ukPTBM");
-    xhr.setRequestHeader("requestId", "noo");
-    xhr.setRequestHeader("deviceId", "joo");
+    xhr.setRequestHeader("requestId", f);
+    xhr.setRequestHeader("deviceId", "dev");
     xhr.setRequestHeader("apiRegistrationId", "CA1AR8hzGYrdU5H6");
 
     xhr.responseType = "json";
@@ -38,14 +51,14 @@ const sendMoneyRequest = (method, url, data) => {
   return promise;
 };
 
-const sendData = () => {
+const sendData = amt => {
   sendMoneyRequest(
     "POST",
     "https://gateway-web.beta.interac.ca/publicapi/api/v2/money-requests/send",
 
     {
       referenceNumber: "string",
-      sourceMoneyRequestId: "koo",
+      sourceMoneyRequestId: f,
       requestedFrom: {
         //"contactId": "string",
         //"contactHash": "string",
@@ -59,7 +72,7 @@ const sendData = () => {
           }
         ]
       },
-      amount: 10,
+      amount: amt,
       currency: "CAD",
       editableFulfillAmount: false,
       requesterMessage: "hi",
@@ -79,17 +92,21 @@ const sendData = () => {
   )
     .then(responseData => {
       console.log(responseData);
+      window.location.href = responseData.paymentGatewayUrl;
     })
+
     .catch(err => {
       console.log(err);
     });
 };
-if (postBtn1) {
-  postBtn1.addEventListener("click", sendData);
-} else if (postBtn2) {
-  postBtn2.addEventListener("click", sendData);
-} else if (postBtn3) {
-  postBtn3.addEventListener("click", sendData);
-} else {
-  return 0;
-}
+
+/* postBtn1.addEventListener("click", e => sendData(5)); */
+
+postBtn1.addEventListener("click", sendData.bind(this, 5));
+postBtn2.addEventListener("click", sendData.bind(this, 10));
+postBtn3.addEventListener("click", sendData.bind(this, 15));
+
+/* postBtn2.addEventListener("click", sendData(10));
+
+postBtn3.addEventListener("click", sendData(15));
+ */

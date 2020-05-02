@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="css/superfish.css" />
 
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/money-request.js"></script>
+    <script src="js/money-request.js" defer></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
   </head>
   <body>
@@ -86,21 +86,17 @@
           >
             <div class="desc animate-box">
               <h2>Select <strong>Donation Amount</strong></h2>
-              <span
-                ><a id="post-btn1" class="btn btn-primary btn-lg" href="#"
-                  ><strong>$5</strong></a
-                ></span
-              >
-              <span
-                ><a id="post-btn2" class="btn btn-primary btn-lg" href="#"
-                  ><strong>$10</strong></a
-                ></span
-              >
-              <span
-                ><a id="post-btn3" class="btn btn-primary btn-lg" href="#"
-                  ><strong>$15</strong></a
-                ></span
-              >
+              <section id="control-center">
+                <button id="post-btn1" class="btn btn-primary btn-lg">
+                  <strong>$5</strong>
+                </button>
+                <button id="post-btn2" class="btn btn-primary btn-lg">
+                  <strong>$10</strong>
+                </button>
+                <button id="post-btn3" class="btn btn-primary btn-lg">
+                  <strong>$15</strong>
+                </button>
+              </section>
             </div>
           </div>
         </div>
