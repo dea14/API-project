@@ -21,7 +21,7 @@ const sendMoneyRequest = (method, url, data) => {
     xhr.open(method, url);
     xhr.setRequestHeader(
       "accessToken",
-      "Bearer 3dd2360f-147d-4f0d-8ce5-b0c264f8ff4e"
+      "Bearer 6e4aaab9-3d2c-4f88-a3ff-e3b57897fb30"
     );
     xhr.setRequestHeader("thirdPartyAccessId", "CA1TAwc9K4ukPTBM");
     xhr.setRequestHeader("requestId", f);
